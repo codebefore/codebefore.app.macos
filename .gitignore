@@ -1,0 +1,14 @@
+.DS_Store
+
+# Local and generated build outputs
+.build/
+.build-release/
+.signed-build/
+DerivedData/
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+
+# Generated from project.yml via XcodeGen
+CodeBeforeNotes.xcodeproj/

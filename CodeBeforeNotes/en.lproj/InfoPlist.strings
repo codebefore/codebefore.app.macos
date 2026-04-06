@@ -1,0 +1,2 @@
+"NSMicrophoneUsageDescription" = "Microphone access is needed to turn your speech into markdown notes.";
+"NSSpeechRecognitionUsageDescription" = "Speech recognition is needed to convert your speech into text live.";

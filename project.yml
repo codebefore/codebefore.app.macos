@@ -1,0 +1,64 @@
+name: CodeBeforeNotes
+options:
+  minimumXcodeGenVersion: 2.45.0
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    MARKETING_VERSION: 1.0
+    CURRENT_PROJECT_VERSION: 1
+targets:
+  CodeBeforeNotes:
+    type: application
+    platform: macOS
+    sources:
+      - path: CodeBeforeNotes
+        excludes:
+          - Info.plist
+    info:
+      path: CodeBeforeNotes/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleDisplayName: codbefore-note
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSApplicationCategoryType: public.app-category.productivity
+        NSMicrophoneUsageDescription: Konusmanizi markdown notlara cevirmek icin mikrofona erisim gerekiyor.
+        NSSpeechRecognitionUsageDescription: Konusmanizi canli olarak metne cevirmek icin speech recognition gerekiyor.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.codebefore.CodeBeforeNotes
+        PRODUCT_NAME: codbefore-note
+        PRODUCT_MODULE_NAME: CodeBeforeNotes
+        DEVELOPMENT_TEAM: T2W7J58Y86
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: CodeBeforeNotes/Info.plist
+        MACOSX_DEPLOYMENT_TARGET: 14.0
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - CodeBeforeNotesTests
+  CodeBeforeNotesTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - CodeBeforeNotesTests
+    dependencies:
+      - target: CodeBeforeNotes
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.codebefore.CodeBeforeNotesTests
+        PRODUCT_NAME: CodeBeforeNotesTests
+        DEVELOPMENT_TEAM: T2W7J58Y86
+        GENERATE_INFOPLIST_FILE: YES
+        MACOSX_DEPLOYMENT_TARGET: 14.0
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/codbefore-note.app/Contents/MacOS/codbefore-note
+        BUNDLE_LOADER: $(TEST_HOST)

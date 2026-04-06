@@ -1,0 +1,2 @@
+"NSMicrophoneUsageDescription" = "Konusmanizi markdown notlara cevirmek icin mikrofona erisim gerekiyor.";
+"NSSpeechRecognitionUsageDescription" = "Konusmanizi canli olarak metne cevirmek icin speech recognition gerekiyor.";
