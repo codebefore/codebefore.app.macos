@@ -8,6 +8,10 @@ final class NoteEditorViewModel: ObservableObject {
     @Published private(set) var localeOptions: [LocaleOption]
     @Published private(set) var statusMessage: String = AppStrings.ready
     @Published private(set) var statusIsError: Bool = false
+    @Published var isTranslateEnabled: Bool = false
+    @Published private(set) var translatedText: String = ""
+    @Published private(set) var translationRequestToken: Int = 0
+    @Published private(set) var translationStatus: TranslationStatus = .idle
 
     private let speechService: SpeechRecognitionServing
     private let saveDestinationFactory: (NoteDraft) throws -> NoteSaveDestination
@@ -72,6 +76,10 @@ final class NoteEditorViewModel: ObservableObject {
     func updateSelectedLocale(_ identifier: String) {
         draft.selectedLocaleIdentifier = identifier
         setStatus(AppStrings.localeUpdated(LocaleResolver.displayName(for: identifier)), isError: false)
+        translatedText = ""
+        if isTranslateEnabled {
+            translationRequestToken &+= 1
+        }
     }
 
     func updateEditorText(_ text: String) {
@@ -155,6 +163,7 @@ final class NoteEditorViewModel: ObservableObject {
         draft = NoteDraft(createdAt: now(), selectedLocaleIdentifier: selectedLocale)
         editorBuffer.reset()
         editorText = ""
+        translatedText = ""
         recordingStatus = .idle
         setStatus(AppStrings.newNoteReady, isError: false)
     }
@@ -228,6 +237,36 @@ final class NoteEditorViewModel: ObservableObject {
     private func syncEditorText() {
         editorText = editorBuffer.displayedText
         draft.body = editorText
+        if isTranslateEnabled {
+            translationRequestToken &+= 1
+        }
+    }
+
+    var translationDirection: TranslationDirection? {
+        TranslationDirection.from(sourceLocaleIdentifier: draft.selectedLocaleIdentifier)
+    }
+
+    func setTranslateEnabled(_ enabled: Bool) {
+        isTranslateEnabled = enabled
+        if enabled {
+            translationRequestToken &+= 1
+        } else {
+            translatedText = ""
+            translationStatus = .idle
+        }
+    }
+
+    func applyTranslatedText(_ text: String) {
+        translatedText = text
+        translationStatus = .idle
+    }
+
+    func reportTranslationStarted() {
+        translationStatus = .translating
+    }
+
+    func reportTranslationFailed(_ message: String) {
+        translationStatus = .failed(message)
     }
 
     private func setStatus(_ message: String, isError: Bool) {

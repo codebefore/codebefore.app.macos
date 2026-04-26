@@ -7,6 +7,8 @@
 "action.startRecording" = "Start Recording";
 "action.stopRecording" = "Stop";
 "action.saveMarkdown" = "Save Markdown";
+"editor.translate.toggle" = "Translate";
+"editor.translate.placeholder" = "Translation will appear here.";
 "save.title" = "Save as Markdown";
 "save.prompt" = "Save";
 "save.cancelled" = "Save cancelled.";

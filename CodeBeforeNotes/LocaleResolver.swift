@@ -9,12 +9,15 @@ struct LocaleOption: Identifiable, Equatable {
 }
 
 enum LocaleResolver {
+    static let allowedLocaleIdentifiers: [String] = ["en-US", "tr-TR", "de-DE"]
+
     static func supportedLocaleOptions(
         preferredIdentifier: String = "tr-TR",
         currentLocale: Locale = .current,
         supportedLocales: Set<Locale> = SFSpeechRecognizer.supportedLocales()
     ) -> [LocaleOption] {
-        let identifiers = supportedLocales.map(\.identifier)
+        let supportedIdentifiers = Set(supportedLocales.map(\.identifier))
+        let identifiers = allowedLocaleIdentifiers.filter { supportedIdentifiers.contains($0) }
         let orderedIdentifiers = identifiers.sorted {
             displayName(for: $0, currentLocale: currentLocale) < displayName(for: $1, currentLocale: currentLocale)
         }

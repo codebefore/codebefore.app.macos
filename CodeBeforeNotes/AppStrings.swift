@@ -39,6 +39,14 @@ enum AppStrings {
         localized("action.saveMarkdown", defaultValue: "Markdown Kaydet")
     }
 
+    static var translateToggleLabel: String {
+        localized("editor.translate.toggle", defaultValue: "Cevir")
+    }
+
+    static var translationPlaceholder: String {
+        localized("editor.translate.placeholder", defaultValue: "Ceviri burada gorunecek.")
+    }
+
     static var audioRecordingFolderReady: String {
         localized("status.audioRecording.folderReady", defaultValue: "Ses kaydi da kaydediliyor.")
     }

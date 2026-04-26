@@ -2,6 +2,7 @@
 
 # Local and generated build outputs
 .build/
+.build-debug/
 .build-release/
 .signed-build/
 DerivedData/

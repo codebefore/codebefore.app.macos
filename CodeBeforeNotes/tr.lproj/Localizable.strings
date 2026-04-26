@@ -7,6 +7,8 @@
 "action.startRecording" = "Kayda Basla";
 "action.stopRecording" = "Durdur";
 "action.saveMarkdown" = "Markdown Kaydet";
+"editor.translate.toggle" = "Cevir";
+"editor.translate.placeholder" = "Ceviri burada gorunecek.";
 "save.title" = "Markdown olarak kaydet";
 "save.prompt" = "Kaydet";
 "save.cancelled" = "Kaydetme iptal edildi.";
